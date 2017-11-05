@@ -1,14 +1,13 @@
-<p>
-  <strong>Name:</strong>
-  <%= @chatroom.name %>
-</p>
+<h2>
+  <strong><%= @chatroom.name %></strong>
+</h2>
 
-<div data-behavior="messages">
+<div data-behavior="messages" data-chatroom-id="<%= @chatroom.id %>">
   <% @messages.each do |message| %>
-    <div><strong><%= message.user.username %></strong>: <%= message.body %></div>
+    <%= render message %>
   <% end %>
 </div>
 
 <%= simple_form_for [@chatroom, Message.new] do |f| %>
-  <%= f.input :body, rows: 1, autofocus: true %>
+  <%= f.input :body, rows: 1, autofocus: true, label: false %>
 <% end %>
